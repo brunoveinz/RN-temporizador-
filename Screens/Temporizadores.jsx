@@ -1,14 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { StyleSheet, View, Platform, StatusBar, Text, SafeAreaView } from 'react-native';
+import FormTempo from '../Components/nuevoTemporizador/FormTempo';
 
 const Temporizadores = () => {
   return (
-    <View>
-      <Text>Temporizadores</Text>
-    </View>
-  )
-}
+    <SafeAreaView>
+      <View>
+        <View>
+          <FormTempo/>
+        </View>
+        <View>
+        </View>
+      </View>
 
-export default Temporizadores
+    </SafeAreaView>
+  );
+};
 
-const styles = StyleSheet.create({})
+export default Temporizadores;
+
+const styles = StyleSheet.create({
+
+});

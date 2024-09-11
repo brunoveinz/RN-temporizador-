@@ -28,15 +28,6 @@ export default function App() {
             )
           }}
         />
-        <BottomTap.Screen 
-            name = "Nuevo Temporizador" 
-            component={CrearTemporizador}
-            options={{
-              tabBarIcon: ({color, size}) => (
-                <Ionicons name="time-outline" color={color} size={size} />
-              )
-            }}          
-        />
         </BottomTap.Navigator>
       </NavigationContainer>
     </>
