@@ -1,11 +1,14 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Alert  } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import PickerSelector from './PickerSelector';
 import MyButtons from '../ux/MyButtons';
 import RunningTimer from './RunningTimer';
+import AlertTemp from './AlertTemp';
+import { GlobalStyles } from '../../constants/Colors';
 
 const FormTempo = () => {
   const [isRunning, SetIsRunning] = useState(false)
+  const [isFinished, SetIsFinished] = useState(false)
   const [segundos, SetSegundos] = useState(0);
   const [horas, SetHoras] = useState(0);
   const [minutos, SetMinutos] = useState(0);
@@ -15,12 +18,17 @@ const FormTempo = () => {
   }, [segundos, horas, minutos])
 
   function StartTemporizadorHandler(){
+    if (horas === 0 && minutos === 0 && segundos === 0) {
+      Alert.alert("Error", "El temporizador no puede iniciar en 00:00:00");
+      return; 
+    }
     SetIsRunning(true)
   }
 
   function StopTemporizadorHandler(){
     SetIsRunning(false)
   }
+
 
   if (isRunning) {
     return (
@@ -32,6 +40,7 @@ const FormTempo = () => {
       />
     );
   }
+
 
   return (
     <View>
@@ -47,7 +56,7 @@ const FormTempo = () => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <MyButtons title='Iniciar' onPress={StartTemporizadorHandler} color='blue' />
+        <MyButtons title='Iniciar' onPress={StartTemporizadorHandler} color= {GlobalStyles.colors.primary500 } />
       </View>
     </View>
   )

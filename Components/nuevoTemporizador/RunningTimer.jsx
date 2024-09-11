@@ -1,12 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import MyButtons from '../ux/MyButtons'
+import AlertTemp from './AlertTemp';
 
-const RunningTimer = ({initialHours, initialMinutes, initialSeconds, onStop}) => {
+
+
+
+const RunningTimer = ({initialHours, initialMinutes, initialSeconds, onAlert, onStop}) => {
   const [hours, setHours] = useState(initialHours);
   const [minutes, setMinutes] = useState(initialMinutes);
   const [seconds, setSeconds] = useState(initialSeconds);
-
+  const [ShowAlarm, setShowAlarm] = useState(false)
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -21,13 +25,21 @@ const RunningTimer = ({initialHours, initialMinutes, initialSeconds, onStop}) =>
         setSeconds(59);
       } else {
         clearInterval(timer);
-        onStop(); // Llama a la función onStop cuando el temporizador llega a 0
+        setShowAlarm(true);
       }
     }, 1000);
 
     return () => clearInterval(timer); // Limpia el intervalo cuando el componente se desmonta
   }, [hours, minutes, seconds]);
 
+
+  if (ShowAlarm){
+    return(
+      <AlertTemp
+        onStop={onStop}
+      />
+    )
+  }
   
   return (
     <View style={styles.container}>
@@ -47,11 +59,11 @@ export default RunningTimer
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',  // Centra verticalmente
-    alignItems: 'center',      // Centra horizontalmente
+    justifyContent: 'center',  
+    alignItems: 'center',      
   },
   timerContainer: {
-    marginTop: 200,          // Espacio entre el texto y el botón
+    marginTop: 200,          
   },
   buttonContainer: {
     

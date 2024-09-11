@@ -1,11 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Temporizadores from './Screens/Temporizadores';
-import CrearTemporizador from './Screens/CrearTemporizador';
 import { Ionicons } from '@expo/vector-icons'
-
+import { GlobalStyles } from './constants/Colors';
 
 const BottomTap = createBottomTabNavigator();
 
@@ -16,12 +15,18 @@ export default function App() {
       <NavigationContainer>
         <BottomTap.Navigator 
           screenOptions={{
-            headerStyle: {backgroundColor: 'blue'},
+            headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
             headerTintColor: 'white',
-            tabBarActiveTintColor: 'blue'
+            tabBarActiveTintColor: 'white',
+            tabBarStyle: {
+              backgroundColor: GlobalStyles.colors.primary500,
+            },
+            tabBarLabelStyle: {
+              fontWeight: 'bold', // Establece la fuente en negrita
+            },
           }}
         >
-        <BottomTap.Screen name="Mis Temporizadores" component={Temporizadores} 
+        <BottomTap.Screen name="Temporizador" component={Temporizadores} 
           options={{
             tabBarIcon: ({color, size}) => (
               <Ionicons name="alarm" color={color} size={size} />
@@ -36,11 +41,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const styles = StyleSheet.create({});
